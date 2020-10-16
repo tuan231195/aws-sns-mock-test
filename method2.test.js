@@ -2,7 +2,7 @@ import { publishMessage } from './sns-service';
 import SNS from 'aws-sdk/clients/sns';
 
 const AWSMock = require('jest-aws-sdk-mock');
-AWSMock.mock('SNS', 'publish', 'test-message');
+AWSMock.mock('SNS', 'publish', 'result-message');
 
 describe('With jest-aws-sdk-mock', () => {
   beforeEach(() => {
@@ -16,9 +16,10 @@ describe('With jest-aws-sdk-mock', () => {
     const sns = new SNS();
     const data = { id: '123' };
 
-    await publishMessage('MESSAGE_TEST', data);
+    const resut = await publishMessage('MESSAGE_TEST', data);
 
     expect(sns.publish).toHaveBeenCalledTimes(1);
     expect(sns.publish).toHaveBeenCalledWith(data);
+    expect(result).toBe('result-message');
   });
 });
