@@ -1,0 +1,31 @@
+{
+  "name": "aws-sns-mock-test",
+  "version": "1.0.0",
+  "description": "it's sample project to understand how mock works with aws.",
+  "main": "sns-service.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "aws-sdk": "^2.772.0",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "jest": "^26.5.3",
+    "jest-aws-sdk-mock": "^1.0.2"
+  },
+  "scripts": {
+    "test": "cross-env NODE_ENV=jest DOTENV_CONFIG_PATH=.env.jest jest",
+    "test-method1": "cross-env NODE_ENV=jest DOTENV_CONFIG_PATH=.env.jest jest method1.test.js",
+    "test-method2": "cross-env NODE_ENV=jest DOTENV_CONFIG_PATH=.env.jest jest method2.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JLGouwy/aws-sns-mock-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JLGouwy/aws-sns-mock-test/issues"
+  },
+  "homepage": "https://github.com/JLGouwy/aws-sns-mock-test#readme"
+}
