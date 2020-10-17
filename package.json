@@ -15,8 +15,8 @@
   },
   "scripts": {
     "test": "cross-env NODE_ENV=jest DOTENV_CONFIG_PATH=.env.jest jest",
-    "test-method1": "cross-env NODE_ENV=jest DOTENV_CONFIG_PATH=.env.jest jest method1.test.js",
-    "test-method2": "cross-env NODE_ENV=jest DOTENV_CONFIG_PATH=.env.jest jest method2.test.js"
+    "test-failure": "cross-env NODE_ENV=jest DOTENV_CONFIG_PATH=.env.jest jest failure/*",
+    "test-succeed": "cross-env NODE_ENV=jest DOTENV_CONFIG_PATH=.env.jest jest succeed/*"
   },
   "repository": {
     "type": "git",

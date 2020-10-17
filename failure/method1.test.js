@@ -26,11 +26,18 @@ describe('With classic jest', () => {
 
   it('should publish message', async  () => {
     const sns = new SNS();
+    const type = 'MESSAGE_TEST';
     const data = { id: '123' };
 
-    await publishMessage('MESSAGE_TEST', data);
+    await publishMessage(type, data);
 
     expect(sns.publish().promise).toHaveBeenCalledTimes(1);
-    expect(sns.publish().promise).toHaveBeenCalledWith(data);
+    expect(sns.publish).toHaveBeenCalledWith({
+      Message: JSON.stringify({
+        type,
+        data
+      }),
+      TopicArn: process.env.SNS_TOPIC_ARN
+    });
   });
 });

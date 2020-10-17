@@ -1,15 +1,38 @@
 # aws-sns-mock-test
 it's sample project to understand how mock works with aws.
+Example with SNS. 
 
-Two methods to test it : 
+## Purpose 
 
-```
-npm run test-method1
-```
-=> with classic mock jest.
+Succeed to make sure that the sns message is sent with specific parameter by calling `snsService.publishMessage()`
 
+## Installation
+
+run : 
+`npm install`
+
+## Folder /succeed
+
+In this case, we import SNS by `import { SNS } from 'aws-sdk';`
+That works as expected.
+
+run: 
 ```
-npm run test-method2
+npm run test-succeed
 ```
 
-=> with jest-aws-sdk-mock
+
+## Folder /failure
+
+In this case, we import SNS by `import SNS from 'aws-sdk/clients/sns';`
+Impossible to make it work.
+
+Two ways  to test it : 
+
+- Method1 : By just using jest.
+- Method2 : By using a third lib, called `jest-aws-sdk-mock`
+
+run: 
+```
+npm run test-failure
+```

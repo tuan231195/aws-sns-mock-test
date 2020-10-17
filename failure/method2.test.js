@@ -14,12 +14,19 @@ describe('With jest-aws-sdk-mock', () => {
 
   it('should publish message', async  () => {
     const sns = new SNS();
+    const type = 'MESSAGE_TEST';
     const data = { id: '123' };
 
-    const resut = await publishMessage('MESSAGE_TEST', data);
+    const resut = await publishMessage(type, data);
 
-    expect(sns.publish).toHaveBeenCalledTimes(1);
-    expect(sns.publish).toHaveBeenCalledWith(data);
     expect(result).toBe('result-message');
+    expect(sns.publish).toHaveBeenCalledTimes(1);
+    expect(sns.publish).toHaveBeenCalledWith({
+      Message: JSON.stringify({
+        type,
+        data
+      }),
+      TopicArn: process.env.SNS_TOPIC_ARN
+    });
   });
 });
