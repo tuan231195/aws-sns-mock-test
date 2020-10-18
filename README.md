@@ -13,6 +13,7 @@ run :
 
 ## Folder /succeed
 
+# /succeed/method1
 In this case, we import SNS by `import { SNS } from 'aws-sdk';`
 That works as expected.
 
@@ -20,6 +21,10 @@ run:
 ```
 npm run test-succeed
 ```
+
+# /succeed/method2
+The implementation in `/succeed/method2` fixes the `failure/method1.test.js` by using `import SNS from 'aws-sdk/clients/sns';`
+https://stackoverflow.com/a/64404039/11465286 
 
 
 ## Folder /failure
@@ -29,7 +34,7 @@ Impossible to make it work.
 
 Two ways  to test it : 
 
-- Method1 : By just using jest.
+- Method1 : By just using jest. (Fixed by https://stackoverflow.com/a/64404039/11465286, see ./succeed/method2)
 - Method2 : By using a third lib, called `jest-aws-sdk-mock`
 
 run: 

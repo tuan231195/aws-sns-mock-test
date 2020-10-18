@@ -3,17 +3,12 @@ import SNS from 'aws-sdk/clients/sns';
 
 const mockPromise = jest.fn(); // mock for deep function - promise
 jest.mock('aws-sdk/clients/sns', () => {
-  return {
-    __esModule: true,
-    default: jest.fn(() => {
-      return {
-        publish: jest.fn(() => ({
-          promise: jest.fn(() => Promise.resolve()),
-        })),
-        
-      }
-    }),
-  };
+  // return a function as a constructor
+  return jest.fn().mockImplementation(function () { // "normal function" not arrow function
+    this.publish = jest.fn(() => ({ // mock publish function
+      promise: mockPromise, // returns an object what includes promise property
+    }));
+  });
 });
 
 
@@ -26,14 +21,18 @@ describe('With classic jest', () => {
   });
 
   it('should publish message', async  () => {
-    const sns = new SNS();
+    //const sns = new SNS();
     const type = 'MESSAGE_TEST';
     const data = { id: '123' };
 
     await publishMessage(type, data);
 
-    expect(sns.publish().promise).toHaveBeenCalledTimes(1);
-    expect(sns.publish).toHaveBeenCalledWith({
+    // get instance of SNS, an instance has been created in production code
+    const snsMocked = SNS.mock.instances[0];
+
+    // expect promise function will be call too
+    expect(mockPromise).toHaveBeenCalled();
+    expect(snsMocked.publish).toHaveBeenCalledWith({
       Message: JSON.stringify({
         type,
         data
